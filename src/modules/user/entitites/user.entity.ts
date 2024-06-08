@@ -1,4 +1,5 @@
 import { GenderEnum } from 'common/enum';
+import { SwipesEntity } from 'modules/swipes/entities';
 import { UserPreferencesEntity } from 'modules/user_preferences/entities';
 import { AbstractEntity } from 'src/common/abstract';
 import { Column, Entity, OneToOne } from 'typeorm';
@@ -75,4 +76,16 @@ export class UserEntity extends AbstractEntity {
    */
   @OneToOne(() => UserPreferencesEntity, (preferences) => preferences.user)
   preferences: UserPreferencesEntity;
+
+  /**
+   * @description User's swiped
+   */
+  @OneToOne(() => SwipesEntity, (swipe) => swipe.swiped)
+  swiped: SwipesEntity[];
+
+  /**
+   * @description User's swiped by
+   */
+  @OneToOne(() => SwipesEntity, (swipe) => swipe.swiper)
+  swiper: SwipesEntity[];
 }

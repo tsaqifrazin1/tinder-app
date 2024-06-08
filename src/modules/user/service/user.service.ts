@@ -1,5 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { GenderEnum, PreferredGenderEnum } from 'common/enum';
+import { GenderEnum, PreferredGenderEnum, SwipeActionEnum } from 'common/enum';
+import { ISwipesRepository, SwipesRepositoryToken } from 'modules/swipes/interface';
+import {
+  IUserPreferencesRepository,
+  UserPreferencesRepositoryToken,
+} from 'modules/user_preferences/interface';
+import { Transactional } from 'typeorm-transactional';
 import { CreateUserDto } from '../dto';
 import { UserEntity } from '../entitites';
 import {
@@ -7,10 +13,6 @@ import {
   IUserService,
   UserRepositoryToken,
 } from '../interface';
-import {
-  UserPreferencesRepositoryToken,
-  IUserPreferencesRepository,
-} from 'modules/user_preferences/interface';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -19,6 +21,8 @@ export class UserService implements IUserService {
     private readonly userRepository: IUserRepository,
     @Inject(UserPreferencesRepositoryToken)
     private readonly userPreferencesRepository: IUserPreferencesRepository,
+    @Inject(SwipesRepositoryToken)
+    private readonly swipesRepository: ISwipesRepository,
   ) {}
 
   async create(dto: CreateUserDto): Promise<UserEntity> {
@@ -33,10 +37,22 @@ export class UserService implements IUserService {
     return this.userRepository.getByUsername(username);
   }
 
+  @Transactional()
   async getOtherProfile(id: number): Promise<UserEntity> {
     const user = await this.userRepository.getById(id);
     if (!user) {
       throw new NotFoundException('User not found');
+    }
+
+    if(!user.isSubscribed){
+      const countSwipes = await this.swipesRepository.getCountSwipesByUserIdByDate(
+        id,
+        new Date(),
+      );
+
+      if (countSwipes >= 10) {
+        throw new NotFoundException('You have reached the limit of swipes');
+      }
     }
 
     const defaultPreferredGender =
@@ -51,6 +67,17 @@ export class UserService implements IUserService {
       preferredGender:
         userPreferences?.preferredGender ?? defaultPreferredGender,
     });
+    
+    if (!profile) {
+      throw new NotFoundException('Profile not found');
+    }
+
+    await this.swipesRepository.create({
+      swiper: user,
+      swiped: profile,
+      action: SwipeActionEnum.LEFT,
+    })
+
     return profile;
   }
 

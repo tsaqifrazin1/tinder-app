@@ -33,7 +33,7 @@ describe('UserRepository', () => {
         bio: 'bio',
         email: 'email',
         gender: GenderEnum.M,
-        bod: new Date(),
+        dob: new Date(),
       } as CreateUserDto;
 
       const result = await _userRepository.create(dto);
@@ -51,7 +51,7 @@ describe('UserRepository', () => {
         bio: 'bio',
         email: 'email',
         gender: GenderEnum.M,
-        bod: new Date(),
+        dob: new Date(),
       } as CreateUserDto;
 
       await expect(_userRepository.create(dto)).rejects.toThrowError();
@@ -66,7 +66,7 @@ describe('UserRepository', () => {
         bio: 'bio',
         email: 'email',
         gender: GenderEnum.M,
-        bod: new Date(),
+        dob: new Date(),
       } as CreateUserDto;
 
       await expect(_userRepository.create(dto)).rejects.toThrowError();

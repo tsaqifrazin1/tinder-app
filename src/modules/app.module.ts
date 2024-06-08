@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user';
+import { AuthModule } from './auth';
+import { DataSource } from 'typeorm';
+import { addTransactionalDataSource } from 'typeorm-transactional';
 
 @Module({
   imports: [
@@ -16,8 +20,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         logging: configService.get('DATABASE_LOGGING'),
       }),
-      inject: [ConfigService]
-    })
+      async dataSourceFactory(options) {
+        if (!options) {
+          throw new Error('Invalid options passed');
+        }
+
+        return addTransactionalDataSource(new DataSource(options));
+      },
+      inject: [ConfigService],
+    }),
+    UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

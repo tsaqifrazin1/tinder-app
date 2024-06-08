@@ -10,42 +10,14 @@ export abstract class AbstractEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   @DeleteDateColumn({
-    nullable: true,
-  })
-  deletedAt: Date;
-}
-
-export abstract class AbstractEntityWithoutGeneratedId {
-  @PrimaryColumn()
-  id: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  @DeleteDateColumn({
-    nullable: true,
-  })
-  deletedAt: Date;
-}
-
-export abstract class AbstractEntityWithoutId {
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  @DeleteDateColumn({
+    name: 'deleted_at',
     nullable: true,
   })
   deletedAt: Date;

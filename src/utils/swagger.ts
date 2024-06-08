@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication): void {
   const options = new DocumentBuilder()
-    .setTitle('API')
+    .setTitle('Tinder Clone API')
     .setVersion('1.0.0')
     .addBearerAuth()
     .build();

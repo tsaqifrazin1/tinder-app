@@ -51,6 +51,7 @@
     "express-rate-limit": "^6.7.0",
     "helmet": "^6.0.1",
     "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "moment": "^2.29.4",
@@ -59,10 +60,11 @@
     "passport-anonymous": "^1.0.1",
     "passport-jwt": "^4.0.1",
     "pg": "^8.9.0",
+    "pg-mem": "^2.8.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.3.11",
+    "typeorm": "0.3.10",
     "typeorm-extension": "^3.5.0",
     "typeorm-naming-strategies": "^4.1.0",
     "typeorm-transactional": "^0.5.0"
@@ -101,7 +103,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -112,7 +114,18 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "^src/(.*)": "<rootDir>/../src/$1"
+      "^src/(.*)": "<rootDir>/src/$1",
+      "^common/(.*)": "<rootDir>/src/common/$1",
+      "^decorators/(.*)": "<rootDir>/src/decorators/$1",
+      "^exceptions/(.*)": "<rootDir>/src/exceptions/$1",
+      "^filters/(.*)": "<rootDir>/src/filters/$1",
+      "^guards/(.*)": "<rootDir>/src/guards/$1",
+      "^interceptors/(.*)": "<rootDir>/src/interceptors/$1",
+      "^interfaces/(.*)": "<rootDir>/src/interfaces/$1",
+      "^middlewares/(.*)": "<rootDir>/src/middlewares/$1",
+      "^migrations/(.*)": "<rootDir>/src/migrations/$1",
+      "^modules/(.*)": "<rootDir>/src/modules/$1",
+      "^utils/(.*)": "<rootDir>/src/utils/$1"
     }
   }
 }

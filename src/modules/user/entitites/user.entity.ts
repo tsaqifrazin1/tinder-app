@@ -1,7 +1,7 @@
-import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { GenderEnum } from 'common/enum';
+import { UserPreferencesEntity } from 'modules/user_preferences/entities';
 import { AbstractEntity } from 'src/common/abstract';
-import { GenderEnum } from 'common/enum/genderEnum';
+import { Column, Entity, OneToOne } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class UserEntity extends AbstractEntity {
@@ -51,7 +51,7 @@ export class UserEntity extends AbstractEntity {
    * @description Date of birth of the user [not null]
    */
   @Column()
-  bod: Date;
+  dob: Date;
 
   /**
    * @description Bio of the user [nullable]
@@ -69,4 +69,10 @@ export class UserEntity extends AbstractEntity {
     name: 'is_subscribed',
   })
   isSubscribed: boolean;
+
+  /**
+   * @description User's preferences
+   */
+  @OneToOne(() => UserPreferencesEntity, (preferences) => preferences.user)
+  preferences: UserPreferencesEntity;
 }

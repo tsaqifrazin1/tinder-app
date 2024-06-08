@@ -30,7 +30,7 @@ export class UserGetSerialization {
 
   @ApiProperty()
   @Expose()
-  bod: Date;
+  dob: Date;
 
   @ApiProperty()
   @Expose()

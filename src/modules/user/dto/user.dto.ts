@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsBoolean, IsDateString, IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
-import { GenderEnum } from 'common/enum/genderEnum';
+import { GenderEnum } from 'common/enum';
 
 export class UserDto {
   @ApiProperty()
@@ -29,7 +29,7 @@ export class UserDto {
 
   @ApiProperty()
   @IsDateString()
-  bod: Date;
+  dob: Date;
 
   @ApiPropertyOptional()
   @IsOptional()

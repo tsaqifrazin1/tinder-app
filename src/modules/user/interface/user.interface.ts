@@ -1,4 +1,4 @@
-import { CreateUserDto, UpdateUserDto } from '../dto';
+import { CreateUserDto, FilterOtherProfileDto, UpdateUserDto } from '../dto';
 import { UserEntity } from '../entitites';
 
 /**
@@ -24,6 +24,11 @@ export interface IUserRepository {
    * @description Get User by Username from Database
    */
   getByUsername(username: string): Promise<UserEntity>;
+
+  /**
+   * @description Get Other Profile from Database
+   */
+  getOtherProfile(id: number, filter?: FilterOtherProfileDto): Promise<UserEntity>;
 
   /**
    * @description Update User in Database
@@ -54,6 +59,11 @@ export interface IUserService {
    * @description Get User by Username
    */
   getByUsername(username: string): Promise<UserEntity>;
+
+  /**
+   * @description Get Other Profile
+   */
+  getOtherProfile(id: number): Promise<UserEntity>;
 
   /**
    * @description Update User

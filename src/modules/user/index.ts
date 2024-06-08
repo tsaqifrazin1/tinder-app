@@ -5,9 +5,10 @@ import { UserController } from './controller';
 import { UserService } from './service';
 import { UserRepository } from './repository';
 import { UserRepositoryToken, UserServiceToken } from './interface';
+import { UserPreferencesModule } from 'modules/user_preferences';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
+  imports: [TypeOrmModule.forFeature([UserEntity]), UserPreferencesModule],
   controllers: [UserController],
   providers: [
     UserService,

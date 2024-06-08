@@ -1,4 +1,4 @@
-import { GenderEnum } from 'common/enum/genderEnum';
+import { GenderEnum } from 'common/enum';
 import { CreateUserDto, UpdateUserDto } from 'modules/user/dto';
 import { UserEntity } from 'modules/user/entitites';
 import { UserRepository } from 'modules/user/repository';

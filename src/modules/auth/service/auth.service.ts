@@ -1,4 +1,9 @@
-import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'modules/user/dto';
@@ -25,13 +30,12 @@ export class AuthService {
     );
   }
   async decodeUser(jwttoken: string): Promise<LoginSerialization> {
-    const token = this.jwtService.verify(
-      jwttoken,
-      this.configService.get('SECRET_KEY'),
-    ) ;
+    const token = await this.jwtService.verifyAsync(jwttoken, {
+      secret: this.configService.get('SECRET_KEY'),
+    });
 
     const user = await this._userService.getById(token.id);
-    if(!user) {
+    if (!user) {
       throw new NotFoundException('User not found');
     }
     return user;
@@ -49,7 +53,10 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials');
     }
 
-    const isPasswordMatch = await UtilService.compareHash(dto.password, user.password);
+    const isPasswordMatch = await UtilService.compareHash(
+      dto.password,
+      user.password,
+    );
     if (!isPasswordMatch) {
       throw new BadRequestException('Invalid credentials');
     }

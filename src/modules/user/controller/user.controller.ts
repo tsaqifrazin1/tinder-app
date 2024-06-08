@@ -68,6 +68,37 @@ export class UserController extends BaseController {
     };
   }
 
+  @Get('profiles')
+  @UseObjectInterceptors(
+    {
+      description: 'Get User by jwt token user id',
+      status: 200,
+    },
+    UserGetSerialization,
+  )
+  @ApiOperation({
+    summary: 'Get User by jwt token user id',
+  })
+  @ApiNotFound({
+    message: 'User not found',
+    description: 'User not found',
+    statusCode: HttpStatus.NOT_FOUND,
+  })
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  async getOtherProfile(
+    @AuthUser() userLogin: UserEntity,
+  ): Promise<IResponse<UserGetSerialization>> {
+    const user = await this.userService.getOtherProfile(userLogin.id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return {
+      message: 'success',
+      data: this.transformObject(UserGetSerialization, user),
+    };
+  }
+
   @Patch()
   @UseObjectInterceptors({
     description: 'Update User by jwt token user id',

@@ -1,4 +1,5 @@
 import { UserEntity } from 'modules/user/entitites';
+import { UserPreferencesEntity } from 'modules/user_preferences/entities';
 import { DataType, newDb } from 'pg-mem';
 import { DataSource } from 'typeorm';
 
@@ -75,6 +76,7 @@ export const setupConnection = async (entities?: any[]) => {
     type: 'postgres',
     entities: [
       UserEntity,
+      UserPreferencesEntity,
     ],
     synchronize: true,
     autoLoadEntities: true,

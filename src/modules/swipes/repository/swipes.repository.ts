@@ -17,7 +17,10 @@ export class SwipesRepository implements ISwipesRepository {
     return this.swipesRepository.save(swipes);
   }
 
-  async getBySwipedIdAndSwiperId(swipedId: number, swiperId: number): Promise<SwipesEntity> {
+  async getBySwipedIdAndSwiperId(
+    swipedId: number,
+    swiperId: number,
+  ): Promise<SwipesEntity> {
     const queryBuilder = this.swipesRepository.createQueryBuilder('swipes');
     queryBuilder.where('swipes.swipedId = :swipedId', { swipedId });
     queryBuilder.andWhere('swipes.swiperId = :swiperId', { swiperId });
@@ -28,6 +31,9 @@ export class SwipesRepository implements ISwipesRepository {
   async getLastUserSwipe(userId: number): Promise<SwipesEntity> {
     const queryBuilder = this.swipesRepository.createQueryBuilder('swipes');
     queryBuilder.where('swipes.swiper = :userId', { userId });
+    queryBuilder.andWhere('swipes.swipedAt = :date', {
+      date: new Date().toISOString().split('T')[0],
+    });
     queryBuilder.orderBy('swipes.createdAt', 'DESC');
 
     return queryBuilder.getOne();

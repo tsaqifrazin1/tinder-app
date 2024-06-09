@@ -10,4 +10,20 @@ export class UtilService {
   static async compareHash(password: string, hash: string): Promise<boolean> {
     return bcrypt.compareSync(password, hash);
   }
+
+  static calculateAge(dob: Date) {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
+  }
 }

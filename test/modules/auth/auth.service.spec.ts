@@ -46,13 +46,13 @@ describe('AuthService', () => {
       const user = { id: 1 };
       const token = 'token';
 
-      jwtService.verify.mockReturnValue(user);
+      jwtService.verifyAsync.mockReturnValue(user as any);
       userService.getById.mockResolvedValue(user as UserEntity);
 
       const result = await authService.decodeUser(token);
 
       expect(result).toBe(user);
-      expect(jwtService.verify).toBeCalledTimes(1);
+      expect(jwtService.verifyAsync).toBeCalledTimes(1);
       expect(userService.getById).toBeCalledTimes(1);
     });
 
@@ -60,7 +60,7 @@ describe('AuthService', () => {
       const user = { id: 1 };
       const token = 'token';
 
-      jwtService.verify.mockReturnValue(user);
+      jwtService.verifyAsync.mockReturnValue(user as any);
       userService.getById.mockResolvedValue(null);
 
       await expect(authService.decodeUser(token)).rejects.toThrowError(
@@ -100,7 +100,7 @@ describe('AuthService', () => {
       expect(result).toBe(user);
       expect(userService.getByUsername).toBeCalledTimes(1);
       expect(jwtService.signAsync).toBeCalledTimes(1);
-      expect(jwtService.verify).toBeCalledTimes(1);
+      expect(jwtService.verifyAsync).toBeCalledTimes(1);
       expect(userService.getById).toBeCalledTimes(1);
     });
 

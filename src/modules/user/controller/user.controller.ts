@@ -1,24 +1,20 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   HttpStatus,
   Inject,
   NotFoundException,
-  Param,
   Patch,
-  UnauthorizedException,
   UseGuards
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'src/common/base/base.controller';
-import { ApiNotFound, ApiUnauthorized } from 'src/common/decorators/error';
+import { ApiNotFound } from 'src/common/decorators/error';
 import {
   UseObjectInterceptors
 } from 'src/common/decorators/request';
-import { AuthUser, RolesTypeDecorators } from 'src/decorators';
-import { RolesTypeGuard } from 'src/guards';
+import { AuthUser } from 'src/decorators';
 import { IResponse } from 'src/interceptors';
 import { JwtAuthGuard } from 'src/modules/auth/guard';
 import { Transactional } from 'typeorm-transactional';
@@ -27,7 +23,7 @@ import { UserEntity } from '../entitites';
 import { IUserService, UserServiceToken } from '../interface';
 import { UserGetSerialization } from '../serializations/user.serialization';
 
-@Controller('user')
+@Controller('users')
 @ApiTags('User')
 export class UserController extends BaseController {
   constructor(

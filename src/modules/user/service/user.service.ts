@@ -1,9 +1,9 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { GenderEnum, PreferredGenderEnum, SwipeActionEnum } from 'common/enum';
-import { ISwipesRepository, SwipesRepositoryToken } from 'modules/swipes/interface';
+import { ISwipesService, SwipesServiceToken } from 'modules/swipes/interface';
 import {
-  IUserPreferencesRepository,
-  UserPreferencesRepositoryToken,
+  IUserPreferencesService,
+  UserPreferencesServiceToken,
 } from 'modules/user_preferences/interface';
 import { Transactional } from 'typeorm-transactional';
 import { CreateUserDto } from '../dto';
@@ -19,10 +19,10 @@ export class UserService implements IUserService {
   constructor(
     @Inject(UserRepositoryToken)
     private readonly userRepository: IUserRepository,
-    @Inject(UserPreferencesRepositoryToken)
-    private readonly userPreferencesRepository: IUserPreferencesRepository,
-    @Inject(SwipesRepositoryToken)
-    private readonly swipesRepository: ISwipesRepository,
+    @Inject(UserPreferencesServiceToken)
+    private readonly userPreferencesService: IUserPreferencesService,
+    @Inject(SwipesServiceToken)
+    private readonly swipesService: ISwipesService,
   ) {}
 
   async create(dto: CreateUserDto): Promise<UserEntity> {
@@ -44,8 +44,8 @@ export class UserService implements IUserService {
       throw new NotFoundException('User not found');
     }
 
-    if(!user.isSubscribed){
-      const countSwipes = await this.swipesRepository.getCountSwipesByUserIdByDate(
+    if (!user.isSubscribed) {
+      const countSwipes = await this.swipesService.getCountSwipesByUserIdByDate(
         id,
         new Date(),
       );
@@ -60,23 +60,23 @@ export class UserService implements IUserService {
         ? PreferredGenderEnum.F
         : PreferredGenderEnum.M;
 
-    const userPreferences = await this.userPreferencesRepository.getById(id);
+    const userPreferences = await this.userPreferencesService.getById(id);
     const profile = await this.userRepository.getOtherProfile(id, {
       ageMin: userPreferences?.ageMin,
       ageMax: userPreferences?.ageMax,
       preferredGender:
         userPreferences?.preferredGender ?? defaultPreferredGender,
     });
-    
+
     if (!profile) {
       throw new NotFoundException('Profile not found');
     }
 
-    await this.swipesRepository.create({
+    await this.swipesService.create({
       swiper: user,
       swiped: profile,
       action: SwipeActionEnum.LEFT,
-    })
+    });
 
     return profile;
   }

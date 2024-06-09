@@ -36,31 +36,31 @@ export class UserRepository implements IUserRepository {
     id: number,
     filter?: FilterOtherProfileDto,
   ): Promise<UserEntity> {
-    const queryBuilder = this.userRepository.createQueryBuilder('user');
-    queryBuilder.where('user.id != :id', { id });
-    if (filter.ageMin) {
+    const queryBuilder = this.userRepository.createQueryBuilder('users');
+    queryBuilder.where('users.id != :id', { id });
+    if (filter?.ageMin) {
       queryBuilder.andWhere(
-        'EXTRACT(YEAR FROM AGE(CURRENT_DATE, user.dob)) >= :ageMin',
+        'EXTRACT(YEAR FROM AGE(CURRENT_DATE, users.dob)) >= :ageMin',
         { ageMin: filter.ageMin },
       );
     }
-    if (filter.ageMax) {
+    if (filter?.ageMax) {
       queryBuilder.andWhere(
-        'EXTRACT(YEAR FROM AGE(CURRENT_DATE, user.dob)) <= :ageMax',
+        'EXTRACT(YEAR FROM AGE(CURRENT_DATE, users.dob)) <= :ageMax',
         { ageMax: filter.ageMax },
       );
     }
     if (
-      filter.preferredGender &&
-      filter.preferredGender !== PreferredGenderEnum.BOTH
+      filter?.preferredGender &&
+      filter?.preferredGender !== PreferredGenderEnum.BOTH
     ) {
-      queryBuilder.andWhere('user.gender = :preferredGender', {
+      queryBuilder.andWhere('users.gender = :preferredGender', {
         preferredGender: filter.preferredGender,
       });
     }
 
     queryBuilder.andWhere(
-      `"user".id not in (SELECT swipes.swiped_id 
+      `"users"."id" not in (SELECT swipes.swiped_id 
                           FROM swipes 
                         WHERE 
                           (swipes.swiper_id = :id and swipes."swiped_at" = :date) or
@@ -71,9 +71,9 @@ export class UserRepository implements IUserRepository {
     );
 
     queryBuilder.andWhere(
-      `"user"."id" not in (SELECT swipes.swiper_id
+      `"users"."id" not in (SELECT swipes.swiper_id
                            FROM swipes
-                           WHERE (swipes.swiped_id = :id and swipes.swiper_id = "user".id and swipes.action = :action)
+                           WHERE (swipes.swiped_id = :id and swipes.swiper_id = "users"."id" and swipes.action = :action)
                            )`,
       { id, action: SwipeActionEnum.LEFT },
     );

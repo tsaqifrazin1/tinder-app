@@ -16,8 +16,6 @@ export const appDataSource = new DataSource({
   schema: configService.get('DATABASE_SCHEMA'),
   namingStrategy: new SnakeNamingStrategy(),
   entities: ['src/modules/**/*{.entity,.index}{.ts,.js}'],
-  migrations: [
-    __dirname + '/../migrations/*{.ts,.js}',
-    __dirname + '/../seeds/*{.ts,.js}',
-  ],
+  migrations: [__dirname + '/../seeds/*{.ts,.js}'],
+  migrationsTableName: 'seeds',
 });

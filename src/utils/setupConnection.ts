@@ -39,6 +39,13 @@ export const setupConnection = async (entities?: any[]) => {
     implementation: () => 'test',
   });
 
+  db.public.registerFunction({
+    name: 'age',
+    args: [DataType.date, DataType.date],
+    returns: DataType.integer,
+    implementation: ([date1, date2]) => Math.abs(date1 - date2),
+  });
+
   const query = `
   SELECT columns.*
   `;

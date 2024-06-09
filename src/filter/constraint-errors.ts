@@ -4,6 +4,4 @@ interface IConstraintErrors {
   [constraintKey: string]: string;
 }
 
-export const ConstraintErrors: IConstraintErrors = {
-  
-};
+export const ConstraintErrors: IConstraintErrors = {};

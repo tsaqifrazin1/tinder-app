@@ -12,7 +12,9 @@ export const appDataSource = new DataSource({
   port: port,
   username: configService.get('DATABASE_USERNAME'),
   password: configService.get('DATABASE_PASSWORD'),
-  database: configService.get('DATABASE_DB_TEST') ?? configService.get('DATABASE_DB') + '_test',
+  database:
+    configService.get('DATABASE_DB_TEST') ??
+    configService.get('DATABASE_DB') + '_test',
   schema: configService.get('DATABASE_SCHEMA'),
   namingStrategy: new SnakeNamingStrategy(),
   entities: ['src/modules/**/*{.entity,.index}{.ts,.js}'],

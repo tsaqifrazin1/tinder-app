@@ -1,6 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsDateString, IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDateString,
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { GenderEnum } from 'common/enum';
 
 export class UserDto {
@@ -39,11 +46,11 @@ export class UserDto {
   @ApiProperty()
   @IsBoolean()
   @Transform(({ value }) => {
-    if(value === 'true') return true;
-    if(value === 'false') return false;
+    if (value === 'true') return true;
+    if (value === 'false') return false;
     return value;
   })
-  isSubscribed: boolean = false;
+  isSubscribed = false;
 
   password: string;
 }

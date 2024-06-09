@@ -24,9 +24,10 @@ import { UserPreferencesModule } from './user_preferences';
             logging: configService.get('DATABASE_LOGGING') === 'true',
             logger:
               configService.get('DATABASE_LOGGING') === 'true' ? 'file' : null,
-            migrationsRun: configService.get('DATABASE_MIGRATIONS_RUN') === 'true',
+            migrationsRun:
+              configService.get('DATABASE_MIGRATIONS_RUN') === 'true',
           };
-        } else if(configService.get('NODE_ENV') === 'test'){
+        } else if (configService.get('NODE_ENV') === 'test') {
           return {
             type: 'postgres',
             host: configService.get('DATABASE_HOST'),

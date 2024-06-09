@@ -20,6 +20,10 @@ export class MatchesEntity extends AbstractEntity {
   @Column({ name: 'user_two_id' })
   userTwoId: number;
 
-  @Column({ name: 'matched_at', type: 'date', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    name: 'matched_at',
+    type: 'date',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   matchedAt: Date;
 }

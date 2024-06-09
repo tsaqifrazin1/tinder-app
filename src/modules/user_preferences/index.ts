@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserPreferencesEntity } from './entities';
 import { UserPreferencesController } from './controller';
-import { UserPreferencesRepositoryToken, UserPreferencesServiceToken } from './interface';
+import {
+  UserPreferencesRepositoryToken,
+  UserPreferencesServiceToken,
+} from './interface';
 import { UserPreferencesRepository } from './repository';
 import { UserPreferencesService } from './service';
 

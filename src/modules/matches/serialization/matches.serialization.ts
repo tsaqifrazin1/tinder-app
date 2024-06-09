@@ -9,14 +9,14 @@ export class MatchesSerialization {
   id: number;
 
   @ApiProperty({
-    type: () => UserGetSerialization
+    type: () => UserGetSerialization,
   })
   @Type(() => UserGetSerialization)
   @Expose()
   userOne: UserGetSerialization;
 
   @ApiProperty({
-    type: () => UserGetSerialization
+    type: () => UserGetSerialization,
   })
   @Type(() => UserGetSerialization)
   @Expose()

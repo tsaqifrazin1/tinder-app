@@ -1,4 +1,4 @@
-import { UtilService } from "utils/service/utils.service";
+import { UtilService } from 'utils/service/utils.service';
 import * as bcrypt from 'bcrypt';
 
 jest.mock('bcrypt', () => ({
@@ -11,7 +11,7 @@ describe('UtilsService', () => {
   let service: UtilService;
 
   beforeEach(() => {
-    jest.resetAllMocks()
+    jest.resetAllMocks();
   });
 
   it('should be defined', () => {
@@ -58,4 +58,4 @@ describe('UtilsService', () => {
       expect(bcrypt.compareSync).toBeCalledWith(password, hash);
     });
   });
-})
+});

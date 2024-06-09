@@ -6,14 +6,12 @@ import {
   Inject,
   NotFoundException,
   Patch,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'src/common/base/base.controller';
 import { ApiNotFound } from 'src/common/decorators/error';
-import {
-  UseObjectInterceptors
-} from 'src/common/decorators/request';
+import { UseObjectInterceptors } from 'src/common/decorators/request';
 import { AuthUser } from 'src/decorators';
 import { IResponse } from 'src/interceptors';
 import { JwtAuthGuard } from 'src/modules/auth/guard';

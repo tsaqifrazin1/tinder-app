@@ -4,7 +4,9 @@ import { UserPreferencesEntity } from '../entities';
 /**
  * @description UserPreferencesRepository Token
  */
-export const UserPreferencesRepositoryToken = Symbol('UserPreferencesRepositoryToken');
+export const UserPreferencesRepositoryToken = Symbol(
+  'UserPreferencesRepositoryToken',
+);
 
 /**
  * @description UserPreferencesRepository Interface
@@ -34,7 +36,9 @@ export interface IUserPreferencesRepository {
 /**
  * @description UserPreferences Service Token
  */
-export const UserPreferencesServiceToken = Symbol('UserPreferencesServiceToken');
+export const UserPreferencesServiceToken = Symbol(
+  'UserPreferencesServiceToken',
+);
 
 /**
  * @description UserPreferences Service Interface

@@ -1,3 +1,3 @@
-export * from './genderEnum'
-export * from './prefferedGenderEnum'
-export * from './swipeActionEnum'
+export * from './genderEnum';
+export * from './prefferedGenderEnum';
+export * from './swipeActionEnum';

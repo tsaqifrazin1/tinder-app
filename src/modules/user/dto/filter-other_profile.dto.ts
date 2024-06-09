@@ -1,4 +1,4 @@
-import { PreferredGenderEnum } from "common/enum";
+import { PreferredGenderEnum } from 'common/enum';
 
 export class FilterOtherProfileDto {
   ageMin?: number;

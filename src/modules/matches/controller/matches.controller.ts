@@ -10,9 +10,7 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from 'modules/user/entitites';
 import { BaseController } from 'src/common/base/base.controller';
 import { ApiNotFound } from 'src/common/decorators/error';
-import {
-  UseArrayInterceptors
-} from 'src/common/decorators/request';
+import { UseArrayInterceptors } from 'src/common/decorators/request';
 import { AuthUser } from 'src/decorators';
 import { IResponse } from 'src/interceptors';
 import { JwtAuthGuard } from 'src/modules/auth/guard';

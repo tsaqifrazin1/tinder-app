@@ -18,6 +18,6 @@ export class UserPreferencesEntity extends AbstractEntityWithouId {
   preferredGender: PreferredGenderEnum;
 
   @OneToOne(() => UserEntity, (user) => user.preferences)
-  @JoinColumn({ name: 'user_id'})
+  @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 }

@@ -7,7 +7,10 @@ import {
   SwipesRepositoryToken,
 } from '../interface';
 import { SwipeActionEnum } from 'common/enum';
-import { MatchesServiceToken, IMatchesService } from 'modules/matches/interface';
+import {
+  MatchesServiceToken,
+  IMatchesService,
+} from 'modules/matches/interface';
 
 @Injectable()
 export class SwipesService implements ISwipesService {
@@ -30,9 +33,7 @@ export class SwipesService implements ISwipesService {
   }
 
   async update(dto: UpdateSwipesDto): Promise<void> {
-    const swipes = await this.swipesRepository.getLastUserSwipe(
-      dto?.swiperId,
-    );
+    const swipes = await this.swipesRepository.getLastUserSwipe(dto?.swiperId);
     if (!swipes) {
       throw new NotFoundException('Swipes not found');
     }
@@ -40,12 +41,12 @@ export class SwipesService implements ISwipesService {
       throw new NotFoundException('Swipes not found');
     }
 
-    if(dto.action === SwipeActionEnum.RIGHT){
+    if (dto.action === SwipeActionEnum.RIGHT) {
       const checkSwipes = await this.swipesRepository.getBySwipedIdAndSwiperId(
         swipes.swiperId,
         swipes.swipedId,
       );
-      if(checkSwipes && checkSwipes.action === SwipeActionEnum.RIGHT){
+      if (checkSwipes && checkSwipes.action === SwipeActionEnum.RIGHT) {
         await this.matchesService.create({
           userOneId: swipes.swiperId,
           userTwoId: swipes.swipedId,

@@ -18,15 +18,15 @@ export interface ISwipesRepository {
   /**
    * @description Get Swipes by Id from Database
    */
-  getBySwipedIdAndSwiperId(swipedId: number, swiperId:number): Promise<SwipesEntity>;
+  getBySwipedIdAndSwiperId(
+    swipedId: number,
+    swiperId: number,
+  ): Promise<SwipesEntity>;
 
   /**
    * @description Get Swipes by UserId By Date from Database
    */
-  getCountSwipesByUserIdByDate(
-    userId: number,
-    date: Date,
-  ): Promise<number>;
+  getCountSwipesByUserIdByDate(userId: number, date: Date): Promise<number>;
 
   /**
    * @description Get Last User Swipe from Database
@@ -56,10 +56,7 @@ export interface ISwipesService {
   /**
    * @description Get Swipes by UserId By Date from Database
    */
-  getCountSwipesByUserIdByDate(
-    userId: number,
-    date: Date,
-  ): Promise<number>;
+  getCountSwipesByUserIdByDate(userId: number, date: Date): Promise<number>;
 
   /**
    * @description Update Swipes

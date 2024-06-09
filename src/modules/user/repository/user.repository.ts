@@ -67,7 +67,11 @@ export class UserRepository implements IUserRepository {
                           (swipes.swiper_id = :id and swipes.action = :action) or
                           (swipes.swiped_id = :id and swipes.action = :action)
                         )`,
-      { id, action: SwipeActionEnum.LEFT, date: new Date().toISOString().split('T')[0]},
+      {
+        id,
+        action: SwipeActionEnum.LEFT,
+        date: new Date().toISOString().split('T')[0],
+      },
     );
 
     queryBuilder.andWhere(

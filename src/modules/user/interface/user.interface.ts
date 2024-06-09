@@ -28,7 +28,10 @@ export interface IUserRepository {
   /**
    * @description Get Other Profile from Database
    */
-  getOtherProfile(id: number, filter?: FilterOtherProfileDto): Promise<UserEntity>;
+  getOtherProfile(
+    id: number,
+    filter?: FilterOtherProfileDto,
+  ): Promise<UserEntity>;
 
   /**
    * @description Update User in Database

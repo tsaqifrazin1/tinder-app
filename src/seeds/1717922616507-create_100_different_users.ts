@@ -17,7 +17,7 @@ export class create100DifferentUsers1717922616507
       user.firstname = faker.person.firstName();
       user.lastname = faker.person.lastName();
       user.isSubscribed = i % 10 === 0 ? true : false;
-      user.gender = [1,10].includes(i) ? GenderEnum.M : GenderEnum.F;
+      user.gender = [1, 10].includes(i) ? GenderEnum.M : GenderEnum.F;
       user.bio = faker.lorem.sentence();
       user.dob = faker.date.past({ years: 40 });
       users.push(user);

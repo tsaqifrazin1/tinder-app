@@ -26,6 +26,10 @@ export class SwipesEntity extends AbstractEntity {
   action: SwipeActionEnum;
 
   @Index()
-  @Column({ name: 'swiped_at', type: 'date', default: () => 'CURRENT_TIMESTAMP'})
+  @Column({
+    name: 'swiped_at',
+    type: 'date',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   swipedAt: Date;
 }

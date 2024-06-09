@@ -1,16 +1,14 @@
 import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { BaseController } from 'common/base/base.controller';
 import { ApiBadRequest, ApiNotFound } from 'src/common/decorators/error';
 import { UseObjectInterceptors } from 'src/common/decorators/request';
 import { IdSerialization } from 'src/common/serialization';
 import { IResponse } from 'src/interceptors';
 import { CreateUserDto } from 'src/modules/user/dto';
 import { LoginDto } from '../dto';
-import { AuthService } from '../service';
-import { plainToInstance } from 'class-transformer';
-import { BaseController } from 'common/base/base.controller';
-import { UserGetSerialization } from 'modules/user/serializations/user.serialization';
 import { LoginSerialization } from '../serialization/login.serialization';
+import { AuthService } from '../service';
 
 @Controller('auth')
 @ApiTags('Auth')

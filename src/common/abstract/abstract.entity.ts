@@ -1,7 +1,6 @@
 import {
   CreateDateColumn,
   DeleteDateColumn,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -36,4 +35,3 @@ export abstract class AbstractEntityWithouId {
   })
   deletedAt: Date;
 }
-

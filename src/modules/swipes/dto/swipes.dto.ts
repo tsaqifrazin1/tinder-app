@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsString } from 'class-validator';
+import { IsEnum } from 'class-validator';
 import { SwipeActionEnum } from 'common/enum';
 import { UserEntity } from 'modules/user/entitites';
 

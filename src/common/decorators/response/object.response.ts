@@ -1,4 +1,3 @@
-import { da } from '@faker-js/faker';
 import { applyDecorators, Type } from '@nestjs/common';
 import {
   ApiExtraModels,
@@ -58,7 +57,7 @@ export const ApiObjectResponse = <
     oneOf: schemas,
   };
   return applyDecorators(
-    ApiExtraModels(...<[]>dataTypes),
+    ApiExtraModels(...(<[]>dataTypes)),
     ApiResponse({
       ...options,
       status: options.status,

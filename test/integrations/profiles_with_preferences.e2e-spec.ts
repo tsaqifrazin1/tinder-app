@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'modules/app.module';
-import { UserEntity } from 'modules/user/entitites';
 import { HttpExceptionFilter, QueryFailedFilter } from 'src/filter';
 import * as request from 'supertest';
 import { initializeTransactionalContext } from 'typeorm-transactional';
@@ -13,8 +12,6 @@ describe('Profiles with preferences (e2e)', () => {
   let app: INestApplication;
 
   let token: string;
-
-  let lastProfile: UserEntity;
 
   beforeAll(async () => {
     initializeTransactionalContext();

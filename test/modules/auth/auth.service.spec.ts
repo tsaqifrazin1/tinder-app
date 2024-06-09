@@ -1,9 +1,9 @@
-import { AuthService } from 'modules/auth/service';
 import { TestBed } from '@automock/jest';
 import { JwtService } from '@nestjs/jwt';
+import { AuthService } from 'modules/auth/service';
+import { UserEntity } from 'modules/user/entitites';
 import { IUserService, UserServiceToken } from 'modules/user/interface';
 import { UserService } from 'modules/user/service';
-import { UserEntity } from 'modules/user/entitites';
 import { UtilService } from '../../../src/utils/service/utils.service';
 
 describe('AuthService', () => {
@@ -105,7 +105,6 @@ describe('AuthService', () => {
     });
 
     it('should throw BadRequestException if user does not exist', async () => {
-      const user = { id: 1, password: 'password' };
       const dto = { password: 'password', username: 'username' };
 
       userService.getByUsername.mockResolvedValue(null);

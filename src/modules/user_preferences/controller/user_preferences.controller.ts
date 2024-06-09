@@ -9,27 +9,23 @@ import {
   Param,
   Patch,
   Post,
-  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { BaseController } from 'src/common/base/base.controller';
-import {
-  UseObjectInterceptors,
-  UsePaginationInterceptors,
-} from 'src/common/decorators/request';
-import { IdSerialization } from 'src/common/serialization';
-import { JwtAuthGuard } from 'src/modules/auth/guard';
-import { CreateUserPreferencesDto, UpdateUserPreferencesDto } from '../dto';
-import { IResponse, PaginationData } from 'src/interceptors';
-import {
-  UserPreferencesServiceToken,
-  IUserPreferencesService,
-} from '../interface';
-import { UserPreferencesSerialization } from '../serialization/user_preferences.serialization';
-import { ApiNotFound } from 'src/common/decorators/error';
 import { AuthUser } from 'decorators/auth-user.decorator';
 import { UserEntity } from 'modules/user/entitites';
+import { BaseController } from 'src/common/base/base.controller';
+import { ApiNotFound } from 'src/common/decorators/error';
+import { UseObjectInterceptors } from 'src/common/decorators/request';
+import { IdSerialization } from 'src/common/serialization';
+import { IResponse } from 'src/interceptors';
+import { JwtAuthGuard } from 'src/modules/auth/guard';
+import { CreateUserPreferencesDto, UpdateUserPreferencesDto } from '../dto';
+import {
+  IUserPreferencesService,
+  UserPreferencesServiceToken,
+} from '../interface';
+import { UserPreferencesSerialization } from '../serialization/user_preferences.serialization';
 
 @Controller('users')
 @ApiTags('UserPreferences')
@@ -58,7 +54,7 @@ export class UserPreferencesController extends BaseController {
     @Body() dto: CreateUserPreferencesDto,
     @AuthUser() user: UserEntity,
   ): Promise<IResponse<IdSerialization>> {
-    dto.user = user
+    dto.user = user;
     const user_preferences = await this._user_preferencesService.create(dto);
     return {
       message: 'success create user_preferences',
@@ -87,7 +83,9 @@ export class UserPreferencesController extends BaseController {
   async getCompaniesById(
     @AuthUser() user: UserEntity,
   ): Promise<IResponse<UserPreferencesSerialization>> {
-    const user_preferences = await this._user_preferencesService.getById(user.id);
+    const user_preferences = await this._user_preferencesService.getById(
+      user.id,
+    );
     if (!user_preferences) {
       throw new NotFoundException('UserPreferences not found');
     }

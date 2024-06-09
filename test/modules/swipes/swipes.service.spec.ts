@@ -1,9 +1,15 @@
-import { TestBed } from "@automock/jest";
-import { IMatchesService, MatchesServiceToken } from "modules/matches/interface";
-import { MatchesService } from "modules/matches/service";
-import { ISwipesRepository, SwipesRepositoryToken, SwipesServiceToken } from "modules/swipes/interface";
-import { SwipesRepository } from "modules/swipes/repository";
-import { SwipesService } from "modules/swipes/service";
+import { TestBed } from '@automock/jest';
+import {
+  IMatchesService,
+  MatchesServiceToken,
+} from 'modules/matches/interface';
+import { MatchesService } from 'modules/matches/service';
+import {
+  ISwipesRepository,
+  SwipesRepositoryToken,
+} from 'modules/swipes/interface';
+import { SwipesRepository } from 'modules/swipes/repository';
+import { SwipesService } from 'modules/swipes/service';
 
 describe('SwipesService', () => {
   let swipesService: SwipesService;
@@ -14,9 +20,7 @@ describe('SwipesService', () => {
     const { unit, unitRef } = TestBed.create(SwipesService).compile();
     swipesService = unit;
     swipesRepository = unitRef.get<SwipesRepository>(SwipesRepositoryToken);
-    matchesService = unitRef.get<MatchesService>(
-      MatchesServiceToken,
-    );
+    matchesService = unitRef.get<MatchesService>(MatchesServiceToken);
   });
 
   afterEach(() => {
@@ -44,7 +48,10 @@ describe('SwipesService', () => {
       const count = 1;
       swipesRepository.getCountSwipesByUserIdByDate.mockResolvedValue(count);
 
-      const result = await swipesService.getCountSwipesByUserIdByDate(1, new Date());
+      const result = await swipesService.getCountSwipesByUserIdByDate(
+        1,
+        new Date(),
+      );
 
       expect(result).toBe(count);
     });
@@ -68,7 +75,9 @@ describe('SwipesService', () => {
       swipesRepository.getLastUserSwipe.mockResolvedValue(null);
       swipesRepository.getBySwipedIdAndSwiperId.mockResolvedValue(swipe as any);
 
-      await expect(swipesService.update(dto as any)).rejects.toThrowError('Swipes not found');
+      await expect(swipesService.update(dto as any)).rejects.toThrowError(
+        'Swipes not found',
+      );
     });
 
     it('should throw NotFoundException if swiperId not match', async () => {
@@ -77,7 +86,9 @@ describe('SwipesService', () => {
       swipesRepository.getLastUserSwipe.mockResolvedValue(swipe as any);
       swipesRepository.getBySwipedIdAndSwiperId.mockResolvedValue(swipe as any);
 
-      await expect(swipesService.update(dto as any)).rejects.toThrowError('Swipes not found');
+      await expect(swipesService.update(dto as any)).rejects.toThrowError(
+        'Swipes not found',
+      );
     });
   });
 });

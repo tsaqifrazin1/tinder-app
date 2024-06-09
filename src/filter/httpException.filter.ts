@@ -1,16 +1,15 @@
 import {
-  ExceptionFilter,
-  Catch,
   ArgumentsHost,
+  BadRequestException,
+  Catch,
+  ExceptionFilter,
   HttpException,
   HttpStatus,
-  BadRequestException,
   Logger,
 } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { Request, Response } from 'express';
 import { IResponse } from 'src/interceptors';
-import { QueryFailedError } from 'typeorm';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -20,7 +19,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = context.getResponse<Response>();
     const request = context.getRequest<Request>();
 
-    let status: number, code: number = 500;
+    let status: number,
+      code = 500;
 
     switch (true) {
       case exception instanceof BadRequestException:

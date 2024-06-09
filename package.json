@@ -18,7 +18,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json --forceExit",
+    "test:e2e": "jest --config ./test/integrations/jest-e2e.json --forceExit",
     "typeorm": "npx typeorm-ts-node-commonjs ",
     "typeorm:create-migration": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
     "typeorm:run-migration": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/utils/ormconfig migration:run",
@@ -28,7 +28,8 @@
     "typeorm:db:create:test": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs db:create -d ./src/utils/ormconfigTest",
     "typeorm:create-seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
     "typeorm:run-seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/utils/ormconfigSeed migration:run",
-    "typeorm:revert-seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/utils/ormconfigSeed migration:revert"
+    "typeorm:revert-seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/utils/ormconfigSeed migration:revert",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
@@ -91,7 +92,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.3",
     "jest": "28.1.3",
-    "lint-staged": "^13.2.2",
+    "lint-staged": "^13.3.0",
     "prettier": "^2.8.8",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
@@ -131,5 +132,12 @@
       "^modules/(.*)": "<rootDir>/src/modules/$1",
       "^utils/(.*)": "<rootDir>/src/utils/$1"
     }
+  },
+  "lint-staged": {
+    "*.{json,ts}": [
+      "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+      "prettier --write \"{src,apps,libs,test}/**/*.ts\""
+    ],
+    "*.js": "eslint --cache --fix"
   }
 }

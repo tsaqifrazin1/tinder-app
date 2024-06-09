@@ -1,4 +1,3 @@
-import { Matches } from 'class-validator';
 import { MatchesEntity } from 'modules/matches/entities';
 import { SwipesEntity } from 'modules/swipes/entities';
 import { UserEntity } from 'modules/user/entitites';
@@ -6,7 +5,7 @@ import { UserPreferencesEntity } from 'modules/user_preferences/entities';
 import { DataType, newDb } from 'pg-mem';
 import { DataSource } from 'typeorm';
 
-export const setupConnection = async (entities?: any[]) => {
+export const setupConnection = async () => {
   const db = newDb({
     autoCreateForeignKeyIndices: true,
   });
@@ -52,7 +51,9 @@ export const setupConnection = async (entities?: any[]) => {
   const queries = [];
 
   db.public.interceptQueries((queryText) => {
-    if (queryText.replace(/[\n ]/g, '').startsWith(query.replace(/[\n ]/g, ''))) {
+    if (
+      queryText.replace(/[\n ]/g, '').startsWith(query.replace(/[\n ]/g, ''))
+    ) {
       return [];
     }
 
@@ -61,7 +62,11 @@ export const setupConnection = async (entities?: any[]) => {
       return db.public.query(query).rows;
     }
 
-    if (queryText.includes('ALTER TABLE') && queryText.includes('ADD') && queryText.includes('CONSTRAINT')) {
+    if (
+      queryText.includes('ALTER TABLE') &&
+      queryText.includes('ADD') &&
+      queryText.includes('CONSTRAINT')
+    ) {
       return [];
     }
 
@@ -84,12 +89,7 @@ export const setupConnection = async (entities?: any[]) => {
 
   const connection: DataSource = await db.adapters.createTypeormDataSource({
     type: 'postgres',
-    entities: [
-      UserEntity,
-      UserPreferencesEntity,
-      SwipesEntity,
-      MatchesEntity,
-    ],
+    entities: [UserEntity, UserPreferencesEntity, SwipesEntity, MatchesEntity],
     synchronize: true,
     autoLoadEntities: true,
   });

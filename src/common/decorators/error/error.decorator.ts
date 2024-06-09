@@ -1,11 +1,5 @@
 import { applyDecorators, HttpStatus } from '@nestjs/common';
-import {
-  ApiExtraModels,
-  ApiResponse,
-  ApiResponseOptions,
-  getSchemaPath,
-} from '@nestjs/swagger';
-import { ErrorDTO } from 'src/common/dto/error.dto';
+import { ApiResponse, ApiResponseOptions } from '@nestjs/swagger';
 
 interface ErrorObject {
   message: string;

@@ -6,12 +6,11 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { STATUS_CODES } from 'http';
 import { QueryFailedError } from 'typeorm';
 
-import { ConstraintErrors } from './constraint-errors';
-import { IResponse } from 'src/interceptors';
 import { Request, Response } from 'express';
+import { IResponse } from 'src/interceptors';
+import { ConstraintErrors } from './constraint-errors';
 
 @Catch(QueryFailedError)
 export class QueryFailedFilter implements ExceptionFilter {
@@ -26,8 +25,7 @@ export class QueryFailedFilter implements ExceptionFilter {
 
     const message = ConstraintErrors[exception.constraint];
 
-    const status =
-      HttpStatus.CONFLICT;
+    const status = HttpStatus.CONFLICT;
 
     const responseObject: IResponse<void> = {
       message: message ?? exception.message,

@@ -4,12 +4,6 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import {
-  ClassConstructor,
-  ClassTransformOptions,
-  plainToClass,
-} from 'class-transformer';
 import { map, Observable } from 'rxjs';
 
 export interface PaginationData<T> {
@@ -51,7 +45,6 @@ export interface ResponseWithPagination<T> {
 export class TransformationInterceptor<T>
   implements NestInterceptor<T, ResponseWithObject<T>>
 {
-  constructor() {}
   intercept(
     context: ExecutionContext,
     next: CallHandler,
@@ -76,7 +69,6 @@ export class TransformationInterceptor<T>
 export class TransformationInterceptorArray<T>
   implements NestInterceptor<T, ResponseWithArray<T>>
 {
-  constructor() {}
   intercept(
     context: ExecutionContext,
     next: CallHandler,
@@ -101,7 +93,6 @@ export class TransformationInterceptorArray<T>
 export class TransformationInterceptorPagination<T>
   implements NestInterceptor<T, ResponseWithPagination<T>>
 {
-  constructor() {}
   intercept(
     context: ExecutionContext,
     next: CallHandler,

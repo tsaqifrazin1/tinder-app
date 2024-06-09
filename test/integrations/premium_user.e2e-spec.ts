@@ -3,10 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { Reflector } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'modules/app.module';
-import { SwipesEntity } from 'modules/swipes/entities';
 import { HttpExceptionFilter, QueryFailedFilter } from 'src/filter';
 import * as request from 'supertest';
-import { DataSource } from 'typeorm';
 import { initializeTransactionalContext } from 'typeorm-transactional';
 
 describe('Regular User (e2e)', () => {
@@ -20,7 +18,7 @@ describe('Regular User (e2e)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
-
+    ``;
     app = moduleFixture.createNestApplication();
     app.setGlobalPrefix('api');
 

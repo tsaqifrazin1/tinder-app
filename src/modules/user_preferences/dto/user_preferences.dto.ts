@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { IsEnum, IsNumber } from 'class-validator';
 import { PreferredGenderEnum } from 'common/enum';
 import { UserEntity } from 'modules/user/entitites';
 

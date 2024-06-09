@@ -1,9 +1,10 @@
-import { TestBed } from "@automock/jest";
-import { ISwipesService, SwipesServiceToken } from "modules/swipes/interface";
-import { SwipesService } from "modules/swipes/service";
-import { IUserPreferencesRepository, UserPreferencesRepositoryToken } from "modules/user_preferences/interface";
-import { UserPreferencesRepository } from "modules/user_preferences/repository";
-import { UserPreferencesService } from "modules/user_preferences/service";
+import { TestBed } from '@automock/jest';
+import {
+  IUserPreferencesRepository,
+  UserPreferencesRepositoryToken,
+} from 'modules/user_preferences/interface';
+import { UserPreferencesRepository } from 'modules/user_preferences/repository';
+import { UserPreferencesService } from 'modules/user_preferences/service';
 
 describe('UserPreferencesService', () => {
   let userPreferencesService: UserPreferencesService;
@@ -29,7 +30,9 @@ describe('UserPreferencesService', () => {
   describe('create', () => {
     it('should create a user preferences', async () => {
       const userPreferences = { id: 1 };
-      userPreferencesRepository.create.mockResolvedValue(userPreferences as any);
+      userPreferencesRepository.create.mockResolvedValue(
+        userPreferences as any,
+      );
 
       const result = await userPreferencesService.create({} as any);
 
@@ -40,7 +43,9 @@ describe('UserPreferencesService', () => {
   describe('getById', () => {
     it('should return a user preferences', async () => {
       const userPreferences = { id: 1 };
-      userPreferencesRepository.getById.mockResolvedValue(userPreferences as any);
+      userPreferencesRepository.getById.mockResolvedValue(
+        userPreferences as any,
+      );
 
       const result = await userPreferencesService.getById(1);
 
@@ -51,7 +56,9 @@ describe('UserPreferencesService', () => {
   describe('update', () => {
     it('should update a user preferences', async () => {
       const userPreferences = { id: 1 };
-      userPreferencesRepository.getById.mockResolvedValue(userPreferences as any);
+      userPreferencesRepository.getById.mockResolvedValue(
+        userPreferences as any,
+      );
 
       await userPreferencesService.update(1, {} as any);
 
@@ -61,14 +68,18 @@ describe('UserPreferencesService', () => {
     it('should throw NotFoundException', async () => {
       userPreferencesRepository.getById.mockResolvedValue(null);
 
-      await expect(userPreferencesService.update(1, {} as any)).rejects.toThrowError();
+      await expect(
+        userPreferencesService.update(1, {} as any),
+      ).rejects.toThrowError();
     });
   });
 
   describe('delete', () => {
     it('should delete a user preferences', async () => {
       const userPreferences = { id: 1 };
-      userPreferencesRepository.getById.mockResolvedValue(userPreferences as any);
+      userPreferencesRepository.getById.mockResolvedValue(
+        userPreferences as any,
+      );
 
       await userPreferencesService.delete(1);
 

@@ -5,9 +5,10 @@ import { SwipesController } from './controller';
 import { SwipesRepositoryToken, SwipesServiceToken } from './interface';
 import { SwipesRepository } from './repository';
 import { SwipesService } from './service';
+import { MatchesModule } from 'modules/matches';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SwipesEntity])],
+  imports: [TypeOrmModule.forFeature([SwipesEntity]), MatchesModule],
   controllers: [SwipesController],
   providers: [
     SwipesService,

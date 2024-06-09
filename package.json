@@ -24,7 +24,8 @@
     "typeorm:run-migration": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/utils/ormconfig migration:run",
     "typeorm:revert-migration": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/utils/ormconfig migration:revert",
     "typeorm:generate-migration": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/utils/ormconfig migration:generate",
-    "typeorm:db:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs db:create -d ./src/utils/ormconfig"
+    "typeorm:db:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs db:create -d ./src/utils/ormconfig",
+    "typeorm:db:create:test": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs db:create -d ./src/utils/ormconfigTest"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",

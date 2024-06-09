@@ -63,11 +63,11 @@ export class UserRepository implements IUserRepository {
       `"user".id not in (SELECT swipes.swiped_id 
                           FROM swipes 
                         WHERE 
-                          (swipes.swiper_id = :id and swipes."swiped_at" = now()) or
+                          (swipes.swiper_id = :id and swipes."swiped_at" = :date) or
                           (swipes.swiper_id = :id and swipes.action = :action) or
                           (swipes.swiped_id = :id and swipes.action = :action)
                         )`,
-      { id, action: SwipeActionEnum.LEFT },
+      { id, action: SwipeActionEnum.LEFT, date: new Date().toISOString().split('T')[0]},
     );
 
     queryBuilder.andWhere(

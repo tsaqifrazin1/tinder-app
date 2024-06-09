@@ -1,3 +1,6 @@
+import { Matches } from 'class-validator';
+import { MatchesEntity } from 'modules/matches/entities';
+import { SwipesEntity } from 'modules/swipes/entities';
 import { UserEntity } from 'modules/user/entitites';
 import { UserPreferencesEntity } from 'modules/user_preferences/entities';
 import { DataType, newDb } from 'pg-mem';
@@ -77,6 +80,8 @@ export const setupConnection = async (entities?: any[]) => {
     entities: [
       UserEntity,
       UserPreferencesEntity,
+      SwipesEntity,
+      MatchesEntity,
     ],
     synchronize: true,
     autoLoadEntities: true,

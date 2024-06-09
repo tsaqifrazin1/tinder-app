@@ -7,12 +7,15 @@ import {
   SwipesRepositoryToken,
 } from '../interface';
 import { SwipeActionEnum } from 'common/enum';
+import { MatchesRepositoryToken, IMatchesRepository } from 'modules/matches/interface';
 
 @Injectable()
 export class SwipesService implements ISwipesService {
   constructor(
     @Inject(SwipesRepositoryToken)
     private readonly swipesRepository: ISwipesRepository,
+    @Inject(MatchesRepositoryToken)
+    private readonly matchesRepository: IMatchesRepository,
   ) {}
 
   async create(dto: CreateSwipesDto): Promise<SwipesEntity> {
@@ -43,7 +46,10 @@ export class SwipesService implements ISwipesService {
         swipes.swipedId,
       );
       if(checkSwipes && checkSwipes.action === SwipeActionEnum.RIGHT){
-        // TODO: Match
+        await this.matchesRepository.create({
+          userOneId: swipes.swiperId,
+          userTwoId: swipes.swipedId,
+        });
       }
     }
     return this.swipesRepository.update(swipes.id, dto);

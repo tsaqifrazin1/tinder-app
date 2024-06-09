@@ -1,4 +1,5 @@
 import { GenderEnum } from 'common/enum';
+import { MatchesEntity } from 'modules/matches/entities';
 import { SwipesEntity } from 'modules/swipes/entities';
 import { UserPreferencesEntity } from 'modules/user_preferences/entities';
 import { AbstractEntity } from 'src/common/abstract';
@@ -88,4 +89,16 @@ export class UserEntity extends AbstractEntity {
    */
   @OneToOne(() => SwipesEntity, (swipe) => swipe.swiper)
   swiper: SwipesEntity[];
+
+  /**
+   * @description User's matches as user one
+   */
+  @OneToOne(() => MatchesEntity, (match) => match.userOne)
+  userOneMatch: MatchesEntity[];
+
+  /**
+   * @description User's matches as user two
+   */
+  @OneToOne(() => MatchesEntity, (match) => match.userTwo)
+  userTwoMatch: MatchesEntity[];
 }

@@ -1,9 +1,31 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": ".",
-  "testEnvironment": "node",
-  "testRegex": ".e2e-spec.ts$",
-  "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  }
+  "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "../",
+    "testRegex": ".*\\.e2e-spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)": "<rootDir>/src/$1",
+      "^common/(.*)": "<rootDir>/src/common/$1",
+      "^decorators/(.*)": "<rootDir>/src/decorators/$1",
+      "^exceptions/(.*)": "<rootDir>/src/exceptions/$1",
+      "^filters/(.*)": "<rootDir>/src/filters/$1",
+      "^guards/(.*)": "<rootDir>/src/guards/$1",
+      "^interceptors/(.*)": "<rootDir>/src/interceptors/$1",
+      "^interfaces/(.*)": "<rootDir>/src/interfaces/$1",
+      "^middlewares/(.*)": "<rootDir>/src/middlewares/$1",
+      "^migrations/(.*)": "<rootDir>/src/migrations/$1",
+      "^modules/(.*)": "<rootDir>/src/modules/$1",
+      "^utils/(.*)": "<rootDir>/src/utils/$1"
+    }
 }
